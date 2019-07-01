@@ -1,0 +1,3 @@
+-Migrate stuff to github repo
+-Prepare for Wednesday's meeting
+-Look into sphinx / read_the_docs.io 

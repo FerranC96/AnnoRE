@@ -1,0 +1,87 @@
+[
+    {
+        "start": 98397096,
+        "strand": 1,
+        "id": "rs7072216",
+        "allele_string": "T/C",
+        "input": "rs7072216",
+        "assembly_name": "GRCh38",
+        "transcript_consequences": [
+            {
+                "strand": -1,
+                "variant_allele": "C",
+                "gene_symbol": "PYROXD2",
+                "gene_id": "ENSG00000119943",
+                "gene_symbol_source": "HGNC",
+                "biotype": "protein_coding",
+                "impact": "MODIFIER",
+                "consequence_terms": [
+                    "intron_variant"
+                ],
+                "transcript_id": "ENST00000370575",
+                "hgnc_id": "HGNC:23517"
+            },
+            {
+                "variant_allele": "C",
+                "strand": -1,
+                "gene_symbol": "MIR1287",
+                "gene_id": "ENSG00000284415",
+                "gene_symbol_source": "HGNC",
+                "biotype": "miRNA",
+                "transcript_id": "ENST00000408492",
+                "hgnc_id": "HGNC:35280",
+                "impact": "MODIFIER",
+                "consequence_terms": [
+                    "upstream_gene_variant"
+                ],
+                "distance": 1789
+            },
+            {
+                "biotype": "processed_transcript",
+                "gene_symbol_source": "HGNC",
+                "gene_id": "ENSG00000119943",
+                "consequence_terms": [
+                    "intron_variant",
+                    "non_coding_transcript_variant"
+                ],
+                "impact": "MODIFIER",
+                "hgnc_id": "HGNC:23517",
+                "transcript_id": "ENST00000483923",
+                "strand": -1,
+                "variant_allele": "C",
+                "gene_symbol": "PYROXD2"
+            }
+        ],
+        "end": 98397096,
+        "most_severe_consequence": "intron_variant",
+        "colocated_variants": [
+            {
+                "frequencies": {
+                    "C": {
+                        "eas": 0.5853,
+                        "eur": 0.341,
+                        "afr": 0.8737,
+                        "sas": 0.544,
+                        "amr": 0.5461
+                    }
+                },
+                "end": 98397096,
+                "seq_region_name": "10",
+                "minor_allele": "T",
+                "start": 98397096,
+                "pubmed": [
+                    22546284,
+                    21931564,
+                    28196478,
+                    24586186
+                ],
+                "phenotype_or_disease": 1,
+                "id": "rs7072216",
+                "strand": 1,
+                "minor_allele_freq": 0.4012,
+                "allele_string": "T/C"
+            }
+        ],
+        "seq_region_name": "10"
+    }
+]

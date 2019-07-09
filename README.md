@@ -12,7 +12,9 @@ Using data related to blood assays, we base our work on three initial sets of da
 
 This github repository is in a parent directory that contains a "blood" directory with all data mentioned above.
 Below, see the a schematic representation of the directory structure.
+Figure:
 ![alt text][tree]
+
 [tree]: https://github.com/FerranC96/MSc_Project3/blob/master/docs/figs/Tree.png "Tree"
 
 ## Outputs

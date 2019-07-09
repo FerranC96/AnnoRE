@@ -12,9 +12,10 @@ Using data related to blood assays, we base our work on three initial sets of da
 
 This github repository is in a parent directory that contains a "blood" directory with all data mentioned above.
 Below, see the a schematic representation of the directory structure.
+![alt text][tree]
 [tree]: https://github.com/FerranC96/MSc_Project3/blob/master/docs/figs/Tree.png "Tree"
 
-##Ouputs
+## Outputs
 
 As mentioned in ./testing_tools/vep/vep_cli.md default outputs for vep will be in its installation folder.
 However, temporarily some selected examples are shown on ./ouputs.

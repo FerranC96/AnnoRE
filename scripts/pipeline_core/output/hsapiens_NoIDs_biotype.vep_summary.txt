@@ -1,0 +1,111 @@
+[VEP run statistics]
+VEP version (API)	 97 (97)
+Annotation sources	Cache: /mnt/s/Project_3/vep_chached_database/homo_sapiens/97_GRCh38; homo_sapiens_core_97_38 on ensembldb.ensembl.org
+Species	homo_sapiens
+Command line options	--biotype --cache --dir /mnt/s/Project_3/vep_chached_database --force_overwrite --fork 4 --input_file ../../../example_data/homo_sapiens_GRCh38_NoIDs.vcf --output_file ./output/hsapiens_NoIDs_biotype.vep --pubmed --regulatory --stats_text
+Start time	2019-07-24 11:39:14
+End time	2019-07-24 11:39:20
+Run time	6 seconds
+Input file	../../../example_data/homo_sapiens_GRCh38_NoIDs.vcf
+Output file	./output/hsapiens_NoIDs_biotype.vep
+
+[General statistics]
+Lines of input read	28
+Variants processed	28
+Variants filtered out	0
+Novel / existing variants	0 (0.0) / 28 (100.0)
+Overlapped genes	34
+Overlapped transcripts	99
+Overlapped regulatory features	9
+
+[Variant classes]
+SNV	28
+
+[Consequences (most severe)]
+missense_variant	11
+synonymous_variant	17
+
+[Consequences (all)]
+missense_variant	165
+synonymous_variant	214
+3_prime_UTR_variant	9
+non_coding_transcript_exon_variant	99
+intron_variant	14
+NMD_transcript_variant	10
+non_coding_transcript_variant	5
+upstream_gene_variant	49
+downstream_gene_variant	115
+TF_binding_site_variant	3
+regulatory_region_variant	20
+
+[Coding consequences]
+missense_variant	165
+synonymous_variant	214
+
+[Variants by chromosome]
+22	28
+
+[Distribution of variants on chromosome 22]
+0	0
+1	0
+2	0
+3	0
+4	0
+5	0
+6	0
+7	0
+8	0
+9	0
+10	0
+11	0
+12	0
+13	0
+14	0
+15	0
+16	0
+17	2
+18	0
+19	22
+20	0
+21	4
+22	0
+23	0
+24	0
+25	0
+26	0
+27	0
+28	0
+29	0
+30	0
+31	0
+32	0
+33	0
+34	0
+35	0
+36	0
+37	0
+38	0
+39	0
+40	0
+41	0
+42	0
+43	0
+44	0
+45	0
+46	0
+47	0
+48	0
+49	0
+50	0
+
+[Position in protein]
+00-10%	22
+10-20%	75
+20-30%	41
+30-40%	54
+40-50%	63
+50-60%	20
+60-70%	28
+70-80%	15
+80-90%	47
+90-100%	14

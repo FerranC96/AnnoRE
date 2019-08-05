@@ -2,7 +2,7 @@
 #This comes sfrom VEP exemple tutorial
 import csv
 
-vcf_file = "../../../example_data/homo_sapiens_GRCh38.vcf"
+# vcf_file = "../../../example_data/homo_sapiens_GRCh38.vcf"
 
 def get_ids(input_file, format = "vcf"):
     SNP_ids = []

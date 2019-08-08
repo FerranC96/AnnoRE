@@ -3,7 +3,10 @@ library("haploR")
 # args <- commandArgs(trailingOnly = TRUE)
 # print(args)
 
+#COULD USE ARGS to let user set LD threshold
+
 x <- queryHaploreg(file="./output/snp_file.txt", ldThresh = 0.9)
 
-require(openxlsx)
-write.xlsx(x, file="./output/hsapiens_haploR.xlsx")
+
+#Change output to tsv or similar
+write.table(x, file="./output/hsapiens_haploR.tsv", quote=FALSE, sep="\t")

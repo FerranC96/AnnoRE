@@ -2,12 +2,12 @@
 VEP version (API)	 97 (97)
 Annotation sources	Cache: /mnt/s/Project_3/vep_chached_database/homo_sapiens/97_GRCh38; homo_sapiens_core_97_38 on ensembldb.ensembl.org
 Species	homo_sapiens
-Command line options	--af_1kg --cache --dir /mnt/s/Project_3/vep_chached_database --force_overwrite --fork 4 --input_file ../../example_input/homo_sapiens_GRCh38.vcf --output_file ./output/hsapiens.vep --pubmed --regulatory --stats_text
-Start time	2019-08-08 11:17:24
-End time	2019-08-08 11:18:35
-Run time	71 seconds
+Command line options	--af_1kg --cache --dir /mnt/s/Project_3/vep_chached_database --force_overwrite --fork 4 --input_file ../../example_input/homo_sapiens_GRCh38.vcf --output_file ./output/hsapiens.tsv --pubmed --regulatory --stats_text --tab
+Start time	2019-08-08 11:34:53
+End time	2019-08-08 11:36:12
+Run time	79 seconds
 Input file	../../example_input/homo_sapiens_GRCh38.vcf
-Output file	./output/hsapiens.vep
+Output file	./output/hsapiens.tsv
 
 [General statistics]
 Lines of input read	173

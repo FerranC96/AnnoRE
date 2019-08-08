@@ -1,16 +1,16 @@
 Current state:
--run_vep.sh calls and runs vep with additional arguments
--Those arguments are currently being handled by vep.py python file and whatever values are assigned to them either via testing.py (hardcoded) or main.py (WIP, interactive arguments)
--Entries with MOTIF have SNP affecting TFBindingMotiff et al. BIOTYPE field add info on regulatory feature (promoter, TFB,..).
-    -Unless --biotype argument is used. In that case ALL entries will have their BIOTYPE field
+-GLANET isn't working again!: 
+    JAVA ERRORS when inputing dbSNP and using corresponding flag, but weirdly enough not when using the GUI on Windows or bed/ coordinates format
+    Work on it has been put on hold
 
-Future:
--Use instead of arguemnts a previous function in the "pipeline" so as to first generate a --config file for vep that can then be used when running vep!
+-Generating unified dataframe:
+    Python code to copy and modify vep output to new file
+    This file is then read in R, merged with HaploR output (with unnnecessary columns dropped)
 
-Other:
--getop_main is for deprecated testing of an alternative argmuent passing method
--vepo_inputs: Funtion for reading snp from a simple .vcp. Used in the old code for the API, but mght be used as so/be adapted to use with final workflow.
+-Visualisation:
+    Load unified output in R, create plots
 
-#TO DO
--Use RegulomeDB data for regulation info downstream afet vep
--Generate plots/tables from output
+-Summary tables:
+    Create those from R
+
+

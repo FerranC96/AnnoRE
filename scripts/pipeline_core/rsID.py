@@ -36,29 +36,37 @@ def get_ids(vep_output, format = "vep"):
     return SNP_ids
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
-def create_vep_medfile(vep_output, medfile):
+# def create_vep_medfile(vep_output, medfile):
     
-    with open(vep_output, newline="") as infile:
-        with open(medfile, "w") as medfile:
-            for line in infile:
-                if not "##" in line:
-                    medfile.write(line)
+#     with open(vep_output, newline="") as infile:
+#         with open(medfile, "w") as medfile:
+#             for line in infile:
+#                 if not "##" in line:
+#                     medfile.write(line)
             
-                    # for rsid in SNP_ids:
-                    #     print(rsid)
+#                     # for rsid in SNP_ids:
+#                     #     print(rsid)
                         
-                    # SNP_ids.append(i[12])
+#                     # SNP_ids.append(i[12])
 
-def rsid_to_vep(medfile, SNP_ids):
-    with open(medfile,"w", newline="") as medfile:
-        infile = csv.reader(medfile, delimiter="\t")
-        outfile = csv.writer(medfile, delimiter="\t")
-        for i in infile:
-            for rsid in SNP_ids:
-                if rsid in i[12]:
-                    outfile.writerows()
-                    print("YAY")
-            print(i[12])
+# def rsid_to_vep(vep_output, medfile, SNP_ids):
+#     with open(medfile,"w", newline="") as outfile:
+#         #outfile = csv.writer(medfile, delimiter="\t")
+#         with open(vep_output, newline="") as infile:
+#             infile = csv.reader(medfile, delimiter="\t")
+#             for i in infile:
+#                 if not "#" in i:
+#                     for rsid in SNP_ids:
+#                         if rsid in i[12]:
+#                             print(i.append(rsid))
+
+
+        
+#             print(i[12])
+
+
+
+
         # with open("./output/med_output", newline="") as infile:
         #     infile = csv.reader(infile, delimiter="\t")
 

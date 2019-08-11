@@ -23,21 +23,14 @@ snp_list = get_ids(fora)
 #Pass those ids to haploR: HaploReg is a tool for exploring annotations of the noncoding genome at variants on haplotype blocks
 #Python -> Rscript
 
-#run_haploR(snp_list)
+run_haploR(snp_list)
 
 
 #Until this point we have saved the results to file
 
-#CREATING FINAL OUTPUT DATAFRAME
-#Copy vep output 
-create_vep_medfile(fora, medfile)
+#RUN Rscript merge_Data:
+#Nw only merges data, should merge data, output main dataframe to tsv (DONE), and also summary tables
 
-#Add rsID column
-rsid_to_vep(medfile, snp_list)
-
-#Code to read data from haploR, and add it to vep output as columns.
-#Work, on current version, just with the query snp (not those found in LD)
-#Python
 
 #Glanet/GAT: 
 

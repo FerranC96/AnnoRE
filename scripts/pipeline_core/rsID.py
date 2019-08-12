@@ -23,11 +23,12 @@ def get_ids(vep_output, format = "vep"):
     SNP_ids = set(SNP_ids)
     SNP_ids = list(SNP_ids)
     
-    regex = r"(rs.*?)\,"    #REGEX to get rs id when cosm and other identifiers are also present
+    #regex = r"(rs.*?)\,"    #REGEX to get rs id when cosm and other identifiers are also present
+    regex2 = r"rs\d+(?=\,|$)"
     with open("./output/snp_file.txt", "w") as outfile:
         for i in SNP_ids:
             try:    #To get both standalone ids and those with COSM
-                match = re.search(regex, i).group(1)
+                match = re.search(regex2, i).group(0)                
                 outfile.write("%s\n" % match)
             except:
                 outfile.write("%s\n" % i)

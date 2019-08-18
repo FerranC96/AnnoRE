@@ -1,4 +1,8 @@
 library(XGR)
+library(ggplot2)
+library(svglite)
+
+#ADD ARGS!!!!
 
 #Load rsIDs and vectorize for XGR:
 snp_file <- read.table("./output/snp_file.txt", quote="\"", comment.char="")
@@ -17,3 +21,9 @@ write.table(enrichment_results, file="./output/enrichment_summary.tsv", quote=FA
 #Producing graphs. Either save as images (most probable) or save for report [future]
 bar_plot <- xEnrichBarplot(enrichment, signature = FALSE)
 dot_plot <- xEnrichDotplot(enrichment)
+
+saveRDS(bar_plot, file = "./output/Plots/enrich_bar.rds")
+saveRDS(dot_plot, file = "./output/Plots/enrich_dot.rds")
+
+ggsave(filename = "./output/Plots/enrich_bar.svg", plot = bar_plot)
+ggsave(filename = "./output/Plots/enrich_dot.svg", plot = dot_plot)

@@ -23,7 +23,7 @@ snp_list = get_ids(fora)
 #Pass those ids to haploR: HaploReg is a tool for exploring annotations of the noncoding genome at variants on haplotype blocks
 #Python -> Rscript
 
-run_haploR(snp_list)
+#run_haploR(snp_list)
 
 
 #Until this point we have saved the results to file

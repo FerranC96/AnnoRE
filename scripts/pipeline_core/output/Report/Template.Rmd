@@ -9,14 +9,13 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Input information and VEP general stats
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. 
 
 This requires kableExtra!!!!
-You can embed an R code chunk like this:
 
 ```{r echo=FALSE, results='asis'}
 library(knitr)
@@ -28,15 +27,68 @@ kable(general_stats, caption = "General Statistics") %>%
   pack_rows("Overlapped features", 5, 7)
 ```
 
-## Including Plots
+Distribution of the inputed variants along the chromosomes:
 
-You can also embed plots, for example:
-
-```{r echo=FALSE}
+```{r echo=FALSE, results='asis'}
 library(ggplot2)
-readRDS("../Plots/enrich_bar.rds")
-readRDS("../Plots/enrich_dot.rds")
+library(plotly)
 
+
+chr_distro <- readRDS("../Plots/chr_distro.rds")
+ggplotly(chr_distro)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## Enrichment analysis
+Using XGR. Results on the following table:
+```{r echo=FALSE, results='asis'}
+library(DT)
+
+enrichment_summary <- read.delim("../enrichment_summary.tsv")
+datatable(enrichment_summary, options = list(columnDefs = list(list(
+  targets = 14,
+  render = JS(
+    "function(data, type, row, meta) {",
+    "return type === 'display' && data.length > 6 ?",
+    "'<span title=\"' + data + '\">' + data.substr(0, 6) + '...</span>' : data;",
+    "}")
+))), callback = JS('table.page(3).draw(false);') )
+```
+
+Using cowplot to organise the graphs.
+You can also embed plots, for example:
+
+```{r echo=FALSE, results='asis'}
+library(ggplot2)
+library(cowplot)
+library(spHelper)
+
+enrich_bar <- readRDS("../Plots/enrich_bar.rds")
+enrich_dot <- readRDS("../Plots/enrich_dot.rds")
+
+ggplotly(rmExpr(enrich_bar))
+
+plot_grid(enrich_bar, enrich_dot, labels = c('Enrichment Bar', 'Enrichment Dot'), label_size = 12)
+
+```
+
+## Regulatory Features
+Proportion of feature types and of biotype inside regulatory:
+```{r echo=FALSE, results='asis'}
+library(ggplot2)
+library(cowplot)
+
+feature_type <- readRDS("../Plots/feature_type.rds")
+reg_bio <- readRDS("../Plots/reg_bio.rds")
+
+ggplotly(reg_bio)
+
+plot_grid(feature_type, reg_bio, labels = c('Types of feature', 'Types of regulation'), label_size = 12)
+
+```
+
+## Stuff from HaploReg
+Data
+
+Plots: Histone marks

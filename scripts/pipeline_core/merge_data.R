@@ -20,6 +20,7 @@ vep_output <- read.delim("./output/OCD.tsv", comment.char="", skip=58)
 vep_output <- vep_output %>% dplyr::mutate(rsID = str_extract(Existing_variation, pattern = "rs\\d+(?=\\,|$)"))
 
 merged <- left_join(vep_output, main_haploR, by=c("rsID"))
+merged <- merged %>% dplyr::mutate(chr = str_extract(Location, pattern = "^.*(?=\\:)"))
 
 write.table(merged, file="./output/OCD_main_output.tsv", quote=FALSE, row.names = FALSE, sep="\t", na = "-")
 
@@ -27,15 +28,46 @@ write.table(merged, file="./output/OCD_main_output.tsv", quote=FALSE, row.names 
 #FROM plotting_and_summary rscript
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
+#Generating tables and plots:
+
+#Distribution over chromosomes
+chr_distro <- feature_type <- merged %>% group_by(chr) %>% summarise(Counts = n_distinct(X.Uploaded_variation))
+
+chr_distro_plot <- ggplot(chr_distro,aes(x = chr, y = Counts, fill = chr)) +
+  geom_bar(stat = "identity") +
+  theme_classic() +
+  labs(
+    x = "Chromosome",
+    y = "Number of variants",
+    title = "Distribution of variants on chromosomes")
+
+saveRDS(chr_distro_plot, file = "./output/Plots/chr_distro.rds")
+ggsave(filename = "./output/Plots/chr_distro.svg", plot = chr_distro_plot)
+
+#Generate pie chart with %of regulatory features vs total!
+
+feature_type <- merged %>% group_by(Feature_type) %>% summarise(Counts = n_distinct(X.Uploaded_variation))
+feature_type_filtered <- feature_type[!(feature_type$Feature_type == "-"),] %>% mutate(percent=Counts/sum(Counts)*100.0)
+
+feature_plot <- ggplot(feature_type_filtered, aes(x ="", y=percent, fill = Feature_type)) +
+  geom_bar(width = 1, stat="identity") +
+  coord_polar("y", start = 0) +
+  labs(x = NULL, y = NULL, fill = NULL, title = "Percentage of types of Features identified") +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  geom_text(aes(label = paste0(round(percent), "%")), 
+            position = position_stack(vjust = 0.5)) +
+  theme_classic() +
+  theme(axis.line = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks = element_blank())
+
+saveRDS(feature_plot, file = "./output/Plots/feature_type.rds")
+ggsave(filename = "./output/Plots/feature_type.svg", plot = feature_plot)
+  
 #First get reg table from main merged output:
 
 regulatory <- merged[merged$Feature_type == "RegulatoryFeature",]
 regulatory_subset <- subset(regulatory, select = c(X.Uploaded_variation, Location, Feature, Consequence, BIOTYPE, Promoter_histone_marks, Enhancer_histone_marks))
-
-#Generating tables and plots:
-
-#Generate pie chart with %of regulatory features vs total!
-
 
 #Biotype
 reg_biotype <- regulatory_subset %>%  group_by(BIOTYPE) %>% summarise(counts = n_distinct(X.Uploaded_variation))
@@ -84,3 +116,6 @@ reg_ehist_plot <- ggplot(reg_ehistone_filtered ,aes(x = Enhancer_histone_marks, 
   )
 saveRDS(reg_ehist_plot, file = "./output/Plots/reg_ehist.rds")
 ggsave(filename = "./output/Plots/reg_ehist.svg", plot = reg_ehist_plot)
+
+#Report generation
+rmarkdown::render("./output/Report/Template.Rmd")

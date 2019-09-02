@@ -34,27 +34,27 @@ main.py in the order they take place:
 ## Dependencies
 
 * VEP script:
-..* Needs a local copy of the [GRCh38 assembly](ftp://ftp.ensembl.org/pub/current_variation/)
+ * Needs a local copy of the [GRCh38 assembly](ftp://ftp.ensembl.org/pub/current_variation/)
 
 * Python v>3. Packages:
-..* `subprocess`
-..* `csv`
-..* `re`
+  * `subprocess`
+  * `csv`
+  * `re`
 * R v=>3.5. Packages:
-..* `cowplot`
-..* `dplyr`
-..* `ggplot2`
-..* `ggpubr`
-..* `grid`
-..* `gridExtra`
-..* `haploR`
-..* `kableExtra`
-..* `knitr`
-..* `lattice`
-..* `plotly`
-..* `rmarkdown`
-..* `stringr`
-..* `svglite`
-..* `tidyr`
-..* `XGR`
+  * `cowplot`
+  * `dplyr`
+  * `ggplot2`
+  * `ggpubr`
+  * `grid`
+  * `gridExtra`
+  * `haploR`
+  * `kableExtra`
+  * `knitr`
+  * `lattice`
+  * `plotly`
+  * `rmarkdown`
+  * `stringr`
+  * `svglite`
+  * `tidyr`
+  * `XGR`
 

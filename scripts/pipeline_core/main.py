@@ -18,18 +18,18 @@ haploR_output = "./output/OCD_haploR.tsv"
 
 #Run vep: Python-> bash
 
-#run_vpe(dins, fora, cache, extra)
+run_vpe(dins, fora, cache, extra)
 
 
 #Get dbSNP ids for inout, even if originally coordinates: Python
 
-#snp_list = get_ids(fora)
+snp_list = get_ids(fora)
 
 
 #Pass those ids to haploR: HaploReg is a tool for exploring annotations of the noncoding genome at variants on haplotype blocks
 #Python -> Rscript
 
-#run_haploR(snp_list)
+run_haploR(snp_list)
 
 
 #Until this point we have saved the results to file
@@ -38,13 +38,13 @@ haploR_output = "./output/OCD_haploR.tsv"
 #Create table results for XGR, save also files for next step's merger
 #Genrate plots: Bar and dot plot
 
-#run_enrichXGR(ld)
+run_enrichXGR(ld)
 
 #DATA & plots:
 
 #First: Python function to read and write data from .txt summary into .tsv files
 
-#gen_stats(fora)
+gen_stats(fora)
 
 #-Add also data from XGR (to the SNPs used, can be found in $annotation. 
 # -output main dataframe to tsv (DONE), and also summary tables (WIP)

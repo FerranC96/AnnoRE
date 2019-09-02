@@ -22,7 +22,7 @@ main.py in the order they take place:
 2. Annotation with VEP and then HaploReg.
 3. Enrichment analysis with XGR.
 4. Data handling and generation of main ouput, summary tables and plots
-5. Generation of the interactive [summary report](http://htmlpreview.github.io/?https://raw.githubusercontent.com/FerranC96/AnnoRE/master/example_data/OCD_example_results/Report/OCD_summary_report.html). Inputs are shown inside the green dashed box, with the outputs listed inside the yellow dashed box. Scripts,and the language they are written in, are depicted as light blue boxes with a protruding arrow.
+5. Generation of the interactive [summary report](https://ferranc96.github.io/AnnoRE/). Inputs are shown inside the green dashed box, with the outputs listed inside the yellow dashed box. Scripts,and the language they are written in, are depicted as light blue boxes with a protruding arrow.
 
 ## How to use
 

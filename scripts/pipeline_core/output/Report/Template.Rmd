@@ -1,94 +1,167 @@
 ---
 title: "Summary Report"
 author: "Ferran Cardoso"
-date: "August 18, 2019"
-output: html_document
+date: "`r Sys.time()`"
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-## Input information and VEP general stats
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. 
-
-This requires kableExtra!!!!
-
-```{r echo=FALSE, results='asis'}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE)
 library(knitr)
 library(kableExtra)
+library(ggplot2)
+library(plotly)
+library(DT)
+library(cowplot)
+library(gridExtra)
+library(grid)
+library(lattice)
+library(ggpubr)
+```
+
+# 1. Input information  
+\    
+**Table 1**: General information on the input variants as seen by VEP.Shows many variants are detected and the features
+they overlap.
+```{r echo=FALSE, results='asis'}
+
 general_stats <- read.delim("../gen_stats.tsv", header = FALSE)
 names(general_stats) <- NULL
 kable(general_stats, caption = "General Statistics") %>%
   kable_styling(bootstrap_options = c("striped", "hover")) %>%
   pack_rows("Overlapped features", 5, 7)
 ```
+\  
 
-Distribution of the inputed variants along the chromosomes:
+# 2. Annotation
+## 2.1 General annotation results  
+\  
+
+**Figure 1**: Distribution of the input variants along the chromosomes. Interactive bar plot showing the total count of variants located in each chromosome.
 
 ```{r echo=FALSE, results='asis'}
-library(ggplot2)
-library(plotly)
-
 
 chr_distro <- readRDS("../Plots/chr_distro.rds")
 ggplotly(chr_distro)
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
-## Enrichment analysis
-Using XGR. Results on the following table:
+\  
+<P style="page-break-before: always">  
+**Figure 2**: Consequences of the input variants. Interactive bar plot in which, for each type of consequence found by VEP, the total number of variants is shown (in log base 10).
 ```{r echo=FALSE, results='asis'}
-library(DT)
+
+consequences <- readRDS("../Plots/consequences.rds")
+ggplotly(consequences)
+```
+\  
+  
+**Table 2 and Figure 3**: Table 2 presents the absolute numbers of feature types reported during annotation, with Figure 3 showing the percentage of each type as a pie chart.
+```{r echo=FALSE, results='asis'}
+
+feature_type_plot <- readRDS("../Plots/feature_type.rds")
+
+feature_type <- read.delim("../feature_type.tsv")
+feature_table <- kable(feature_type, caption = "Total count of types of features") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+feature_type_plot
+feature_table
+
+```
+\  
+  
+<P style="page-break-before: always">
+## 2.2 Regulatory Features  
+\  
+
+**Table 3**: Interactive table with those variants identified as regulatory by VEP. Searching and sorting by columns is possible.
+```{r echo=FALSE, results='asis'}
+
+regulatory_variants <- read.delim("../regulatory_variants.tsv")
+datatable(regulatory_variants, rownames = FALSE, options = list(
+  order = list(3, 'desc') ))
+
+```
+\  
+  
+**Figure 4**: Interactive bar plot showing the count of disctinct rsIDs associated with each subcategory of regulatory features (Biotype).
+```{r echo=FALSE, results='asis'}
+
+reg_bio <- readRDS("../Plots/reg_bio.rds")
+
+ggplotly(reg_bio)
+```
+\  
+<P style="page-break-before: always">  
+**Figure 5**: Histone modification marks on enhancers. Working only with variants identified as regulatory, this interactive bar plot shows how many unique rsIDs have been associated to each of the 24 possible human tissues by looking at histone modification marks in enhancers from HaploReg.
+```{r echo=FALSE, results='asis'}
+
+reg_ehist <- readRDS("../Plots/reg_ehist.rds")
+
+ggplotly(reg_ehist)
+
+#subplot(ggplotly(reg_ehist), ggplotly(reg_phist), titleX = TRUE)
+```
+\  
+  
+**Figure 6**: Histone modification marks on promoters. Working only with variants identified as regulatory, this interactive bar plot shows how many unique rsIDs have been associated to each of the 24 possible human tissues by looking at histone modification marks in promoters from HaploReg.
+```{r echo=FALSE, results='asis'}
+
+reg_phist <- readRDS("../Plots/reg_phist.rds")
+
+ggplotly(reg_phist)
+
+#subplot(ggplotly(reg_ehist), ggplotly(reg_phist), titleX = TRUE)
+```
+\    
+<P style="page-break-before: always">
+**Figure 7**: DNAse I Hypersensitivity Sites. Of those variants identified as regulatory, this interactive bar plot shows the count of unique rsIDS associated with EDIs (Epigenomic Identifiers as defined by the Roadmap Epigenomics Project).
+```{r echo=FALSE, results='asis'}
+
+reg_dnase <- readRDS("../Plots/reg_dnase.rds")
+
+ggplotly(reg_dnase)
+
+```
+\  
+\  
+
+# 3. Enrichment analysis  
+\  
+
+**Table 4**: Interactive table with showing the most relevant ontology terms in the enrichment analysis via XGR.
+Table that summarises the results of the enrichment in XGR. Showing the most significant ontology terms, the pertinent statistics and the rsID associated with each term. It is interactive thus allowing for sorting by columns (useful to prioritise terms by any of the metrics shown) and with a search box that can be used to see if a particular rsID is associated with an ontology term.
+
+```{r echo=FALSE, results='asis'}
 
 enrichment_summary <- read.delim("../enrichment_summary.tsv")
-datatable(enrichment_summary, options = list(columnDefs = list(list(
+datatable(enrichment_summary, options = list(autoWidth = TRUE, columnDefs = list(list(
   targets = 14,
   render = JS(
     "function(data, type, row, meta) {",
     "return type === 'display' && data.length > 6 ?",
     "'<span title=\"' + data + '\">' + data.substr(0, 6) + '...</span>' : data;",
     "}")
-))), callback = JS('table.page(3).draw(false);') )
+))) )
 ```
+\  
 
-Using cowplot to organise the graphs.
-You can also embed plots, for example:
+**Figure 8**: Enrichment results. A) Horizontal bar plot where the significant ontology terms are sorted by fold change while also specifying the FDR adjusted p-values. B) Also sorts the ontology terms found but depicts them as a dot plot with the log base 10 of the adjusted p-value on the Y axis and the Z-score on the X axis. There is also a further layer of information encoded in the size of the plots which represent the number of SNPs found overlapping each term.
 
-```{r echo=FALSE, results='asis'}
-library(ggplot2)
-library(cowplot)
-library(spHelper)
-
+```{r echo=FALSE, results='hide', fig.show = 'hide'}
 enrich_bar <- readRDS("../Plots/enrich_bar.rds")
 enrich_dot <- readRDS("../Plots/enrich_dot.rds")
 
-ggplotly(rmExpr(enrich_bar))
-
-plot_grid(enrich_bar, enrich_dot, labels = c('Enrichment Bar', 'Enrichment Dot'), label_size = 12)
-
+lay2 <- rbind(c(1,1,1,1,1),
+              c(2,2,2,2,2))
+gt <- grid.arrange(enrich_bar, enrich_dot, layout_matrix=lay2)
+enrich_plot <- as_ggplot(gt) +  draw_plot_label(label = c("A", "B"), size = 14,
+                  x = c(0, 0), y = c(1, 0.5))
 ```
 
-## Regulatory Features
-Proportion of feature types and of biotype inside regulatory:
 ```{r echo=FALSE, results='asis'}
-library(ggplot2)
-library(cowplot)
 
-feature_type <- readRDS("../Plots/feature_type.rds")
-reg_bio <- readRDS("../Plots/reg_bio.rds")
-
-ggplotly(reg_bio)
-
-plot_grid(feature_type, reg_bio, labels = c('Types of feature', 'Types of regulation'), label_size = 12)
-
+enrich_plot
+  
 ```
-
-## Stuff from HaploReg
-Data
-
-Plots: Histone marks

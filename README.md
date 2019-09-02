@@ -1,35 +1,60 @@
-MSc_Project3
+AnnoRE: a pipeline for integrated functional annotation and enrichment analysis of genetic variants associated with complex traits.
 ============
 
-Working with VEP instead of ANNOVAR. More details on VEP can be found in ./testing_tools/vep/vep_cli.md.
-Using data related to blood assays, we base our work on three initial sets of data:
-1. GTex v7: Whole blood genes and significant_variant_pair_genes
-2. Metabolites (gwassserver_metabolomics): From shin_et_al. Directory also contains shure_2011 koraf4 and twinsuk associations
-3. Proteome atlas: From Sun et al. 2018. WIP
+Developed during the third and final project of the MSc in Bioinformatics and Theoretical Systems Biology, at Imperial College London.
+Work supervised by: Dr. Antonio Berlanga-Taylor (@AntonioJBT) 
 
-## Inputs
+AnnoRE AnnoRE is a pipeline for integrated functional annotation and enrichment analysis of genetic variants associated with complex traits.
+With a focus on regulatory regions, AnnoRE leverages pre-existing tools for annotation and enrichment analysis, integrating the different outputs and
+producing summary tables and plots. 
+The inclusion of these results into an interactive summary report facilitates interpretation,
+making AnnoRE an accessible yet powerful tool suitable for less experienced users
 
+AnnoRE flowchart:
+![alt text][flowchart]
 
-This github repository is in a parent directory that contains a "blood" directory with all data mentioned above.
-Below, see the a schematic representation of the directory structure.
-Figure:
-![alt text][tree]
+[flowchart]: https://github.com/FerranC96/MSc_Project3/blob/master/docs/figs/Pipeline.png "Tree"
 
-[tree]: https://github.com/FerranC96/MSc_Project3/blob/master/docs/figs/Tree.png "Tree"
+A schematic representation of AnnoRE’s pipeline is shown as a flowchart.
+The central steps during the analysis are all shown embedded into the main function
+main.py in the order they take place: 
+1. Loading of input data and setting of parameters.
+2. Annotation with VEP and then HaploReg.
+3. Enrichment analysis with XGR.
+4. Data handling and generation of main ouput, summary tables and plots
+5. Generation of the interactive [summary report](). Inputs are shown inside the green dashed box, with the outputs listed inside the yellow dashed box. Scripts,and the language they are written in, are depicted as light blue boxes with a protruding arrow.
 
-## Outputs
+## How to use
 
-As mentioned in ./testing_tools/vep/vep_cli.md default outputs for vep will be in its installation folder.
-However, temporarily some selected examples are shown on ./ouputs.
+(Make sure the data is in .VCF format first)
+1. Change input and cache directory and name output in `main.py`.
+2. Run `main.py`
+3. Outputs will appear on the `/Output` directory
 
+## Dependencies
 
-Current work
-------------
-XXXXXXX.
+* VEP script:
+..* Needs a local copy of the [GRCh38 assembly](ftp://ftp.ensembl.org/pub/current_variation/)
 
-From the review on ./papers, get ideas for the overall future steps in the annotation.
-
-TO DO:
-1. Write bash script to handle inputs, run VEP, and saving ouputs.
-2. Far away land(>week): Cgat-core and running on HPC)
+* Python v>3. Packages:
+..* `subprocess`
+..* `csv`
+..* `re`
+* R v=>3.5. Packages:
+..* `cowplot`
+..* `dplyr`
+..* `ggplot2`
+..* `ggpubr`
+..* `grid`
+..* `gridExtra`
+..* `haploR`
+..* `kableExtra`
+..* `knitr`
+..* `lattice`
+..* `plotly`
+..* `rmarkdown`
+..* `stringr`
+..* `svglite`
+..* `tidyr`
+..* `XGR`
 

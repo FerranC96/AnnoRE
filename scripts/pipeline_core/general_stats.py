@@ -1,6 +1,10 @@
 import csv
 import re
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#                           Extract data from VEP summary                     #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
 def gen_stats(vep_output):
     vep_summ = vep_output + "_summary.txt"
     general_statistics = []
